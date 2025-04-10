@@ -7,21 +7,20 @@
 
 import Foundation
 
-// Models
 struct BerryResponse: Codable, Identifiable {
-    var id: Int // This property already exists
+    var id: Int
     var name: String
     var firmness: Firmness
     var flavors: [Flavor]
     var growthTime: Int
     var maxHarvest: Int
     var naturalGiftPower: Int
-    var naturalGiftType: Type
+    var naturalGiftType: BerryType
     var size: Int
     var smoothness: Int
     var soilDryness: Int
 
-    // Custom CodingKeys to match JSON keys
+    // Match JSON keys via custom CodingKeys
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -35,8 +34,14 @@ struct BerryResponse: Codable, Identifiable {
         case smoothness
         case soilDryness = "soil_dryness"
     }
+    
+    // Computed property to provide an image URL for the berry.
+    // We assume the image URL follows the pattern:
+    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/{berry-name}-berry.png
+    var imageURL: URL? {
+        URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/\(name.lowercased())-berry.png")
+    }
 }
-
 
 struct Firmness: Codable {
     var name: String
@@ -53,7 +58,8 @@ struct FlavorDetail: Codable {
     var url: String
 }
 
-struct Type: Codable {
+// Renamed from "Type" to avoid conflict with Swift’s keyword.
+struct BerryType: Codable {
     var name: String
     var url: String
 }

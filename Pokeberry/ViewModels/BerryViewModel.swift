@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class BerryViewModel: ObservableObject {
     @Published var berries: [BerryResponse] = []
@@ -39,7 +38,7 @@ class BerryViewModel: ObservableObject {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 print("Error fetching data: \(String(describing: error))")
                 completion(nil)
