@@ -1,7 +1,7 @@
-# PokéBerry: Project Overview
+# PokéBowl: Project Overview
 
 ### Project Description
-**PokéBerry** is a small Swift app to look up information about different berries from the game Pokémon. 
+**PokéBowl** is a small Swift app to look up information about different berries from the game Pokémon. 
 May later be expanded to become a Pokédex. The user may favorite or add notes about the Pokémon as well!
 
 ### Built with:
