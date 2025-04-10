@@ -1,7 +1,7 @@
-# PokéBowl: Project Overview
+# PokeBowl: Project Overview
 
 ### Project Description
-**PokéBowl** is a PokéDex Swift app to look up information about different berries from the game Pokémon. Users may favorite or add notes about the Pokémon as well!
+**PokeBowl** is a PokéDex Swift app to look up information about different berries from the game Pokémon. Users may favorite or add notes about the Pokémon as well!
 
 ### Built with:
 - **Xcode**: IDE used for editing code.
