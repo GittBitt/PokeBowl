@@ -1,5 +1,5 @@
 //
-//  PokemonListView.swift
+//  FavoritesListView.swift
 //  Pokeberry
 //
 //  Created by Nghi Huynh on 4/9/25.
@@ -9,21 +9,23 @@ import SwiftUI
 import Combine
 import Foundation
 
-struct PokemonListView: View {
-    @StateObject private var viewModel = PokemonViewModel()
+struct FavoritesListView: View {
+    @EnvironmentObject var favoritesManager: FavoritesManager
     @State private var searchText = ""
-
-    var filteredPokemon: [PokemonResponse] {
+    
+    var filteredFavorites: [PokemonResponse] {
         if searchText.isEmpty {
-            return viewModel.pokemon
+            return favoritesManager.favorites
         } else {
-            return viewModel.pokemon.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            return favoritesManager.favorites.filter {
+                $0.name.lowercased().contains(searchText.lowercased())
+            }
         }
     }
-
+    
     var body: some View {
         NavigationView {
-            List(filteredPokemon) { poke in
+            List(filteredFavorites) { poke in
                 NavigationLink(destination: PokemonDetailView(pokemon: poke)) {
                     HStack {
                         if let imageUrlString = poke.sprites.frontDefault,
@@ -58,11 +60,8 @@ struct PokemonListView: View {
                     }
                 }
             }
-            .navigationTitle("Pokedex")
+            .navigationTitle("Favorites")
             .searchable(text: $searchText)
-        }
-        .onAppear {
-            viewModel.fetchPokemon()
         }
     }
 }

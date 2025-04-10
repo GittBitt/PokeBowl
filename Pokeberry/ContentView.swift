@@ -20,6 +20,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Berries", systemImage: "leaf")
                 }
+            FavoritesListView()
+                .tabItem {
+                    Label("Favorites", systemImage: "star")
+                }
         }
     }
 }

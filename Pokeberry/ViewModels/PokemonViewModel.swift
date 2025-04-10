@@ -13,7 +13,7 @@ class PokemonViewModel: ObservableObject {
     @Published var pokemon: [PokemonResponse] = []
 
     func fetchPokemon() {
-        let pokemonCount = 10 // Fetch Pokémon with IDs from 1 to pokemonCount
+        let pokemonCount = 10 // Fetch Pokémon IDs 1...10
         let group = DispatchGroup()
         
         for id in 1...pokemonCount {

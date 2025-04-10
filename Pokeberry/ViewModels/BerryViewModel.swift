@@ -11,7 +11,7 @@ class BerryViewModel: ObservableObject {
     @Published var berries: [BerryResponse] = []
 
     func fetchBerries() {
-        let berryCount = 10 // Fetch berries with IDs from 1 to berryCount
+        let berryCount = 10 // Fetch berries with IDs 1...10
         let group = DispatchGroup()
         
         for id in 1...berryCount {
@@ -40,7 +40,7 @@ class BerryViewModel: ObservableObject {
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
-                print("Error fetching data: \(String(describing: error))")
+                print("Error fetching berry data: \(String(describing: error))")
                 completion(nil)
                 return
             }
@@ -49,7 +49,7 @@ class BerryViewModel: ObservableObject {
                 let berryResponse = try JSONDecoder().decode(BerryResponse.self, from: data)
                 completion(berryResponse)
             } catch {
-                print("Error decoding JSON: \(error)")
+                print("Error decoding berry JSON: \(error)")
                 completion(nil)
             }
         }.resume()

@@ -20,24 +20,17 @@ struct BerryResponse: Codable, Identifiable {
     var smoothness: Int
     var soilDryness: Int
 
-    // Match JSON keys via custom CodingKeys
     enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case firmness
-        case flavors
+        case id, name, firmness, flavors
         case growthTime = "growth_time"
         case maxHarvest = "max_harvest"
         case naturalGiftPower = "natural_gift_power"
         case naturalGiftType = "natural_gift_type"
-        case size
-        case smoothness
+        case size, smoothness
         case soilDryness = "soil_dryness"
     }
     
-    // Computed property to provide an image URL for the berry.
-    // We assume the image URL follows the pattern:
-    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/{berry-name}-berry.png
+    // Computed property to build a berry image URL from its name.
     var imageURL: URL? {
         URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/\(name.lowercased())-berry.png")
     }
@@ -58,7 +51,6 @@ struct FlavorDetail: Codable {
     var url: String
 }
 
-// Renamed from "Type" to avoid conflict with Swift’s keyword.
 struct BerryType: Codable {
     var name: String
     var url: String

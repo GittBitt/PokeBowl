@@ -15,7 +15,6 @@ struct BerryDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                // Display the berry image at the top.
                 AsyncImage(url: berry.imageURL) { phase in
                     if let image = phase.image {
                         image.resizable()
