@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 struct PokemonDetailView: View {
-    let pokemon: PokemonResponse
+    let pokemon: Pokemon
     @State private var speciesDescription: String = ""
     @EnvironmentObject var favoritesManager: FavoritesManager
 

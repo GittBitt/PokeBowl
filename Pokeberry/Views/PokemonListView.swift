@@ -13,7 +13,7 @@ struct PokemonListView: View {
     @StateObject private var viewModel = PokemonViewModel()
     @State private var searchText = ""
 
-    var filteredPokemon: [PokemonResponse] {
+    var filteredPokemon: [Pokemon] {
         if searchText.isEmpty {
             return viewModel.pokemon
         } else {

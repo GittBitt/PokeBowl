@@ -13,7 +13,7 @@ struct FavoritesListView: View {
     @EnvironmentObject var favoritesManager: FavoritesManager
     @State private var searchText = ""
     
-    var filteredFavorites: [PokemonResponse] {
+    var filteredFavorites: [Pokemon] {
         if searchText.isEmpty {
             return favoritesManager.favorites
         } else {

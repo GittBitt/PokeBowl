@@ -10,10 +10,10 @@ import Combine
 import Foundation
 
 class PokemonViewModel: ObservableObject {
-    @Published var pokemon: [PokemonResponse] = []
+    @Published var pokemon: [Pokemon] = []
 
     func fetchPokemon() {
-        let pokemonCount = 10 // Fetch Pokémon IDs 1...10
+        let pokemonCount = 300 // Fetch Pokémon IDs 1...10
         let group = DispatchGroup()
         
         for id in 1...pokemonCount {
@@ -33,7 +33,7 @@ class PokemonViewModel: ObservableObject {
         }
     }
 
-    private func fetchPokemonData(withID id: Int, completion: @escaping (PokemonResponse?) -> Void) {
+    private func fetchPokemonData(withID id: Int, completion: @escaping (Pokemon?) -> Void) {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(id)/") else {
             print("Invalid Pokémon URL")
             completion(nil)
@@ -46,7 +46,7 @@ class PokemonViewModel: ObservableObject {
                 return
             }
             do {
-                let pokemon = try JSONDecoder().decode(PokemonResponse.self, from: data)
+                let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
                 completion(pokemon)
             } catch {
                 print("Error decoding Pokémon JSON: \(error)")
