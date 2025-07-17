@@ -85,7 +85,7 @@ struct PokemonDetailView: View {
                 }
                 Divider()
                 // Abilities info
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
                     Text("Abilities:")
                         .font(.headline)
                     ForEach(pokemon.abilities, id: \.slot) { ability in
@@ -94,14 +94,14 @@ struct PokemonDetailView: View {
                 }
                 Divider()
                 // Stats info
-                VStack(alignment: .leading) {
+                VStack(alignment: .center, spacing: 10) {
                     Text("Stats:")
                         .font(.headline)
                     ForEach(pokemon.stats, id: \.stat.name) { stat in
                         HStack {
                             Text(stat.stat.name.capitalized)
                             Spacer()
-                            Text("\(stat.baseStat)")
+                            Text("\(stat.baseStat)").bold()
                         }
                     }
                 }

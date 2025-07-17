@@ -11,10 +11,11 @@ import Foundation
 
 struct BerryDetailView: View {
     let berry: BerryResponse
-
+    
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack { // The main container VStack
+                // Berry image
                 AsyncImage(url: berry.imageURL) { phase in
                     if let image = phase.image {
                         image.resizable()
@@ -29,25 +30,43 @@ struct BerryDetailView: View {
                 }
                 .frame(height: 200)
                 
-                Text(berry.name.capitalized)
-                    .font(.largeTitle)
-                    .bold()
-                Text("Firmness: \(berry.firmness.name.capitalized)")
-                Text("Growth Time: \(berry.growthTime) minutes")
-                Text("Max Harvest: \(berry.maxHarvest)")
-                Text("Natural Gift Power: \(berry.naturalGiftPower)")
-                Text("Size: \(berry.size)")
-                Text("Smoothness: \(berry.smoothness)")
-                Text("Soil Dryness: \(berry.soilDryness)")
+                // Change this VStack's alignment to .center
+                VStack(alignment: .center, spacing: 10) {
+                    Text(berry.name.capitalized)
+                        .font(.largeTitle)
+                        .bold()
+                    
+                    Divider()
+                    
+                    Text("Firmness: \(berry.firmness.name.capitalized)")
+                    Text("Growth Time: \(berry.growthTime) minutes")
+                    Text("Max Harvest: \(berry.maxHarvest)")
+                    Text("Natural Gift Power: \(berry.naturalGiftPower)")
+                    Text("Size: \(berry.size)")
+                    Text("Smoothness: \(berry.smoothness)")
+                    Text("Soil Dryness: \(berry.soilDryness)")
+                    
+                    Divider()
+                    
+                    // Flavors Section
+                    Text("Flavors:")
+                        .font(.headline)
 
-                Text("Flavors:")
-                    .font(.headline)
-                ForEach(berry.flavors, id: \.flavor.name) { flavor in
-                    Text("- \(flavor.flavor.name.capitalized): \(flavor.potency)")
+                    ForEach(berry.flavors, id: \.flavor.name) { flavor in
+                        HStack {
+                            // The flavor name on the left
+                            Text("- \(flavor.flavor.name.capitalized)")
+                            
+                            Spacer()
+                            
+                            // The flavor potency on the right, in bold
+                            Text("\(flavor.potency)").bold()
+                        }
+                    }
+                    Spacer()
                 }
-                Spacer()
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("Berry Details")
     }
