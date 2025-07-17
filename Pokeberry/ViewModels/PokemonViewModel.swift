@@ -13,7 +13,10 @@ class PokemonViewModel: ObservableObject {
     @Published var pokemon: [Pokemon] = []
 
     func fetchPokemon() {
-        let pokemonCount = 300 // Fetch Pokémon IDs 1...10
+        // Clear the array to prevent duplicates
+        self.pokemon.removeAll()
+        
+        let pokemonCount = 300 // Fetch Pokémon IDs 1...300
         let group = DispatchGroup()
         
         for id in 1...pokemonCount {
@@ -29,7 +32,8 @@ class PokemonViewModel: ObservableObject {
         }
         
         group.notify(queue: .main) {
-            print("All Pokémon data fetched.")
+            self.pokemon.sort { $0.id < $1.id }
+            print("All Pokémon data fetched and sorted.")
         }
     }
 

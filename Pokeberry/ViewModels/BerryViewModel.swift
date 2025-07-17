@@ -11,6 +11,9 @@ class BerryViewModel: ObservableObject {
     @Published var berries: [BerryResponse] = []
 
     func fetchBerries() {
+        // Clear the array to prevent duplicates
+        self.berries.removeAll()
+
         let berryCount = 10 // Fetch berries with IDs 1...10
         let group = DispatchGroup()
         
@@ -27,7 +30,8 @@ class BerryViewModel: ObservableObject {
         }
         
         group.notify(queue: .main) {
-            print("All berry data fetched.")
+            self.berries.sort { $0.id < $1.id }
+            print("All berry data fetched and sorted.")
         }
     }
 
